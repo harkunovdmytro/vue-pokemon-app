@@ -1,5 +1,7 @@
 # vue-pokemon-app
 
+**Here is Pokemon App made with Vue and Vuex**
+
 ## Project setup
 ```
 npm install
