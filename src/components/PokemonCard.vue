@@ -27,19 +27,21 @@ export default {
 
 <style lang="scss">
 .pokemon__card {
+  max-width: 50wh;
   cursor: pointer;
-  padding: 20px;
-  // margin: 20px auto;
+  padding: 10px;
   border: solid;
   border-radius: 10px;
-  text-align: center;
+  text-align: center !important;
   &:hover {
     background-color: #eee;
   }
   .pokemon__img_container {
+    display: flex;
     img {
-      width: 150px;
-      height: 150px;
+      margin: auto;
+      width: 120px;
+      height: 120px;
     }
   }
   .pokemon__name {

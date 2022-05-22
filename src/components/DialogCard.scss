@@ -8,27 +8,50 @@
     height: 100%;
     background-color: rgba($color: #000000, $alpha: 0.5);
     display: flex;
+    h2 {
+        font-size: 20px;
+        text-transform: capitalize;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
     .pokemon__details-card {
-        margin: auto;
+        margin: auto !important;
         border: solid;
         padding: 20px;
         border-radius: 10px;
         background: yellow;
+        .pokemon__details {
+            display: flex;
+        }
         .pokemon__details-header {
+            font-size: 30px;
             text-transform: capitalize;
             text-align: center;
-            margin: auto;
+            margin: 0 auto 10px;
+            display: flex;
+            justify-content: space-between;
+            img {
+                width: 30px;
+                height: 30px;
+            }
         }
         .pokemon__details-img-wrapper {
-            padding: 20px;
             margin: 20px 0;
             border: solid;
             border-radius: 10px;
             text-align: center;
             background-color: whitesmoke;
             .pokemon__details-img {
-                width: min(300px, 100%);
+                max-width: 100%;
                 height: auto;
+            }
+        }
+        .pokemon__details-characteristics {
+            display: flex;
+            flex-flow: column;
+            justify-content: space-evenly;
+            &>* {
+                padding: 10px;
             }
         }
         .pokemon__details-stats {
@@ -44,6 +67,7 @@
                 border: solid;
                 border-radius: 10px;
                 margin-right: 10px;
+                background-color: #fff;
             }
         }
         .pokemon__details-types-list {
@@ -54,6 +78,16 @@
                 margin-right: 10px;
             }
         }
+    }
+}
+
+@media (max-width: 960px) {
+    .pokemon__details {
+        flex-flow: column;
+        margin: auto;
+    }
+    .pokemon__details_background {
+        overflow-y: auto;
     }
 }
 

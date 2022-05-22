@@ -19,12 +19,24 @@ export default createStore({
             count: 0,
         }
     },
+    getters: {
+        getAllPokemons(state) {
+            return state.allPokemons
+        },
+        getPokemonDetails(state) {
+            return state.pokemonDetails
+        },
+        getPokemons(state) {
+            return state.pokemons
+        },
+    },
     mutations: {
         increment(state) {
             state.count++
         },
         pushAllPokemons(context, pokemons) {
             pokemons.results.forEach(pokemon => {
+                pokemon.imgLink = getImgUrl(pokemon.url)
                 context.allPokemons.push(pokemon)
             });
         },

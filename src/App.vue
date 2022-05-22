@@ -1,27 +1,40 @@
 <template>
   <div class="controls">
-    <h1 class="text-3xl font-bold underline">Pokemons</h1>
-    <h1>{{ count }}</h1>
+    <h1 class="text-3xl font-bold py-2">Pokemons</h1>
     <search-input @onChangeSearchInput="getInputSearchText" />
-    <button @click="getMorePokemons">get more pokemons</button>
-    <ol>
+    <div class="pokemon__container" v-show="inputSearchText">
       <template v-for="pokemon in searchPokemonsArray" :key="pokemon.name">
-        <li>{{ pokemon.name }}</li>
+        <pokemon-card :pokemon="pokemon" @showCard="toggleCard" />
       </template>
-    </ol>
+    </div>
   </div>
-
+  <div class="pokemon__container" v-show="!inputSearchText">
+    <template v-for="pokemon in pokemons" :key="pokemon.name">
+      <pokemon-card :pokemon="pokemon" @showCard="toggleCard" />
+    </template>
+  </div>
+  <div class="text-center" v-show="!inputSearchText">
+    <button
+      @click="getMorePokemons"
+      class="
+        my-10
+        bg-sky-600
+        hover:bg-sky-700
+        text-white
+        font-bold
+        py-6
+        px-12
+        rounded-lg
+      "
+    >
+      get more pokemons
+    </button>
+  </div>
   <dialog-card
     :cardVisible="cardVisible"
     :pokemonDetails="pokemonDetails"
     @hideCard="toggleCard"
   />
-
-  <div class="pokemon__container">
-    <template v-for="pokemon in pokemons" :key="pokemon.name">
-      <pokemon-card :pokemon="pokemon" @showCard="toggleCard" />
-    </template>
-  </div>
 </template>
 
 <script>
@@ -34,7 +47,6 @@ export default {
   components: { SearchInput, PokemonCard, DialogCard },
   data() {
     return {
-      hi: "hi",
       inputSearchText: "",
       cardVisible: false,
     };
@@ -54,22 +66,22 @@ export default {
     },
   },
   computed: {
-    count() {
-      return this.$store.state.count;
-    },
     pokemons() {
-      return !this.inputSearchText && this.$store.state.pokemons;
+      // return !this.inputSearchText && this.$store.getters.getPokemons;
+      return this.$store.getters.getPokemons;
     },
     pokemonDetails() {
-      return this.$store.state.pokemonDetails;
+      return this.$store.getters.getPokemonDetails;
     },
     searchPokemonsArray() {
-      return this.$store.state.allPokemons.filter(
-        (pokemon, index) =>
-          this.inputSearchText &&
-          pokemon.name.includes(this.inputSearchText.toLowerCase()) &&
-          index < 20
-      );
+      // console.log(this.$store.getters.getAllPokemons);
+      return this.$store.getters.getAllPokemons
+        .filter(
+          (pokemon, index) =>
+            pokemon.name.includes(this.inputSearchText.toLowerCase()) &&
+            index < 1000
+        )
+        .filter((_, index) => index < 20);
     },
   },
   beforeMount() {
@@ -91,37 +103,27 @@ body {
   color: #2c3e50;
   .controls {
     text-align: center;
+    max-width: 800px;
+    margin: auto;
+    padding: 10px;
+    * {
+      width: 100% !important;
+    }
   }
 }
 .pokemon__container {
   padding: 10px;
-  max-width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  // display: grid;
-  // grid-template-columns: repeat(5, 1fr);
-  // grid-gap: 10px;
-  gap:10px;
+  max-width: 800px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  gap: 10px;
   justify-content: center !important;
-}
-@media (max-width: 1140px) {
-  .pokemon__container {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-@media (max-width: 860px) {
-  .pokemon__container {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 @media (max-width: 680px) {
   .pokemon__container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 430px) {
-  .pokemon__container {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 </style>
