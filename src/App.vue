@@ -1,5 +1,6 @@
 <template>
   <div class="controls">
+    <h1 class="text-3xl font-bold underline">Pokemons</h1>
     <h1>{{ count }}</h1>
     <search-input @onChangeSearchInput="getInputSearchText" />
     <button @click="getMorePokemons">get more pokemons</button>

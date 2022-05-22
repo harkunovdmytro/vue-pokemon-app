@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+
 const GET_POKEMONS_URL_SEARCH = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
 
 const GET_POKEMONS_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20"
