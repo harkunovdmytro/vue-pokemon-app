@@ -1,6 +1,6 @@
 # vue-pokemon-app
 
-**Here is Pokemon App made with Vue and Vuex**
+**Here is Pokemon App made with Vue, Vuex and tailwind**
 
 ## Project setup
 ```
